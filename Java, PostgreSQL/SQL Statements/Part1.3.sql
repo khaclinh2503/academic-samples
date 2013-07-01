@@ -1,0 +1,11 @@
+-- Philip Scuderi
+-- Part 1, Question 3
+
+SELECT NUM_IMPRESSIONS, COUNT(UserID) AS NUM_USERS
+FROM (SELECT UserID, COUNT(*) AS NUM_IMPRESSIONS
+      FROM Events
+      WHERE EventTypeID = (SELECT EventTypeID FROM EventTypes WHERE EventTypeDesc = 'impression')
+      GROUP BY UserID) AS SUB_QUERY
+GROUP BY NUM_IMPRESSIONS
+ORDER BY NUM_IMPRESSIONS
+
